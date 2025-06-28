@@ -109,10 +109,10 @@ export const placeOrderStripe = async (req,res) => {
     } catch (error) {
         res.json({ success: false, message: error.message })
     }
-}
+};
 
 // stripe webhooks to verify payment action : /stripe
-export const StripeWebhooks = async (request, response) => {
+export const stripehooks = async (request, response) => {
     // stripe gateway initialize
     const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY)
 

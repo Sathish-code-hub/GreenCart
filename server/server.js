@@ -10,6 +10,8 @@ import productRouter from './routes/productRoute.js';
 import cartRouter from './routes/cartRoute.js';
 import addressRouter from './routes/addressRoute.js';
 import orderRouter from './routes/orderRoute.js';
+import orderRouter from './routes/orderRoute.js';
+import { stripehooks } from './controllers/orderController.js';
 
 
 const app = express();
@@ -21,7 +23,7 @@ await connectCLoudinary()
 // allow multiple origins
 const allowedOrigins = ['http://localhost:5173']
 
-app.post('/stripe', express.raw({type: 'application/json'}), StripeWebhooks)
+app.post('/stripe', express.raw({type: 'application/json'}), stripehooks)
 
 // middleware configuration
 app.use(express.json());
@@ -41,7 +43,7 @@ app.listen(port, ()=>{
 })
 
 import { failedLoginAttempts } from './controllers/sellerController.js';
-import { StripeWebhooks, stripeWebhooks } from './controllers/orderController.js';
+import { stripe_webhook, stripehooks, stripehookweb, StripeWebhooks, stripeWebhooks } from './controllers/orderController.js';
 
 const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes
 
