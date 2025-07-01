@@ -38,7 +38,7 @@ const SellerLogin = () => {
     },[isSeller])
 
   return !isSeller && (
-    <form onSubmit={onSubmitHandler} className='min-h-screen flex items-center text-sm text-gray-600'>
+    <form onSubmit={onSubmitHandler} data-aos="fade-up" className='min-h-screen flex items-center text-sm text-gray-600'>
 
         <div className='flex flex-col gap-5 m-auto items-start p-8 py-12 min-w-80 sm:min-w-88 rounded-lg shadow-xl border
         border-gray-200'>

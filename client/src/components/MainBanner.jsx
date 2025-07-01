@@ -8,7 +8,7 @@ const MainBanner = () => {
   const {navigate} = useAppContext()
 
   return (
-    <div className="relative ">
+    <div className="relative" data-aos="fade-up">
       {/* Background images */}
       <img src={assets.main_banner_bg} alt="banner" className="w-full hidden md:block" />
       <img src={assets.main_banner_bg_sm} alt="banner" className="w-full block md:hidden" />

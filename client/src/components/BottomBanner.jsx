@@ -3,7 +3,7 @@ import { assets, features } from '../assets/assets'
 
 const BottomBanner = () => {
   return (
-    <div className='relative mt-24 '>
+    <div className='relative mt-24 ' data-aos="fade-up">
       <img src={assets.bottom_banner_image} alt='banner' className='w-full hidden md:block'/>
       <img src={assets.bottom_banner_image_sm} alt='banner' className='w-full block md:hidden'/>
 

@@ -19,11 +19,22 @@ import ProductList from './pages/seller/ProductList'
 import Orders from './pages/seller/Orders'
 import ScrolltoTop from './components/ScrolltoTop'
 import Loading from './components/Loading'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+import { useEffect } from 'react'
 
 const App = () => {
   
   const isSellerpath = useLocation().pathname.includes('seller')
   const {showUserLogin, isSeller} = useAppContext()
+
+  useEffect(() => {
+  AOS.init({
+    duration: 1000, // animation duration
+    once: true,     // whether animation should happen only once
+    easing: 'ease-in-out'
+  });
+}, []);
 
   return (
     <div className='min-h-screen text-gray-700 bg-white text-default'>
