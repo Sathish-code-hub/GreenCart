@@ -1,6 +1,7 @@
 import User from "../models/user.js";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import validator from 'validator'
 
 // register user : /api/user/register
 export const register = async(req,res) => {
@@ -9,6 +10,22 @@ export const register = async(req,res) => {
 
         if(!name || !email || !password){
             return res.json({success:false, message: "Missing Details"})
+        }
+
+         // Validate email format
+        if (!validator.isEmail(email)) {
+            return res.json({ success: false, message: "Invalid email format" });
+        }
+
+        // Validate password strength
+        if (!validator.isStrongPassword(password, {
+            minLength: 8,
+           
+        })) {
+            return res.json({
+                success: false,
+                message: "Password must be at least 8 characters",
+            });
         }
 
         const existingUser = await User.findOne({email})

@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 const Login = () => {
 
-    const { setUser, setShowUserLogin, axios, navigate } = useAppContext();
+    const { setUser, setShowUserLogin, redirectPath, axios, navigate } = useAppContext();
 
     const [state, setState] = React.useState("login");
     const [name, setName] = React.useState("");

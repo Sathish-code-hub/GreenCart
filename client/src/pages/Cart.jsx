@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import { assets, dummyAddress } from "../assets/assets";
 import toast from "react-hot-toast";
+import Login from "../components/Login";
 
 const Cart = () => {
 
-    const {products, updateCartItem, cartItems, navigate, 
+    const {products, updateCartItem, cartItems, navigate, setsetUser, setShowUserLogin, 
     getCartCount, getCartAmount, removeFromCart, currency, axios, user, setCartItems} = useAppContext()
 
     const [cartArray, setCartArray] = useState([])
@@ -45,6 +46,12 @@ const Cart = () => {
 
     const placeOrder = async() => {
         try {
+            if (!user || !user._id) {
+                toast.error("Please login to place an order.")
+                setShowUserLogin(true)
+                return
+            }
+
             if (!selectedAddress) {
                 return toast.error("Please select an address")
             }

@@ -24,14 +24,14 @@ const AllProducts = () => {
     return () => clearTimeout(timeout)
   }, [products, searchQuery])
 
-  // Function to highlight matched text
-  const highlightMatch = (text) => {
-    const query = searchQuery.trim()
-    if (!query) return text
+  // // Function to highlight matched text
+  // const highlightMatch = (text) => {
+  //   const query = searchQuery.trim()
+  //   if (!query) return text
 
-    const regex = new RegExp(`(${query})`, 'gi')
-    return text.replace(regex, '<mark class="bg-yellow-200 text-black">$1</mark>')
-  }
+  //   const regex = new RegExp(`(${query})`, 'gi')
+  //   return text.replace(regex, '<mark class="bg-yellow-200 text-black">$1</mark>')
+  // }
 
   return (
     <div className='mt-16 flex flex-col w-full px-4'>
@@ -41,8 +41,17 @@ const AllProducts = () => {
       </div>
 
       {loading ? (
-        <div className='w-full text-center py-10'>
-          <p className='text-gray-500 text-lg animate-pulse'>Loading products...</p>
+        <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 mt-6 gap-3 md:gap-6'>
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={i}
+              className="animate-pulse bg-white shadow rounded-xl p-3 space-y-3 border border-gray-200"
+            >
+              <div className="bg-gray-300 h-40 w-full rounded-lg" />
+              <div className="h-4 bg-gray-300 rounded w-3/4" />
+              <div className="h-4 bg-gray-300 rounded w-1/2" />
+            </div>
+          ))}
         </div>
       ) : (
         <>
@@ -55,15 +64,8 @@ const AllProducts = () => {
               {filteredProducts.filter(p => p.inStock).map((product, index) => (
                 <ProductCard
                   key={index}
-                  product={{
-                    ...product,
-                    // Pass highlighted name as HTML
-                    name: (
-                      <span
-                        dangerouslySetInnerHTML={{ __html: highlightMatch(product.name) }}
-                      />
-                    )
-                  }}
+                  product={product}
+                  searchQuery={searchQuery}
                 />
               ))}
             </div>

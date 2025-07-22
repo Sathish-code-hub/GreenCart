@@ -21,6 +21,7 @@ export const AppContextProvider = ({children}) => {
     const [products,setProducts] = useState([])
     const [cartItems,setCartItems] = useState({})
     const [searchQuery,setSearchQuery] = useState({})
+    const [redirectPath, setRedirectPath] = useState('/');
     const location = useLocation()
 
 
@@ -154,7 +155,7 @@ export const AppContextProvider = ({children}) => {
     const value = {navigate,user,setUser,isSeller, setIsSeller,
                    showUserLogin, setShowUserLogin, products, currency, cartItems, setCartItems,
                    addtoCart, updateCartItem, removeFromCart, searchQuery, setSearchQuery, location,
-                   getCartCount, getCartAmount, axios, fetchProducts
+                   getCartCount, getCartAmount, axios, fetchProducts,  redirectPath, setRedirectPath,
     }
 
     return <AppContext.Provider value={value}>
