@@ -131,36 +131,32 @@ export const stripeWebhooks = async (request, response) => {
 
     // handle the event
     switch (event.type) {
-        case "payment_intent.succeeded":{
-            const paymentIntent = event.data.object;
-            const paymentIntentId = paymentIntent.id;
+         case "checkout.session.completed": {
+            const session = event.data.object;
 
-            // getting session metadata;
-            const session = await stripeInstance.checkout.sessions.list({
-                payment_intent : paymentIntentId,
-            });
+            const { orderId, userId } = session.metadata;
 
-            const {orderId, userId} = session.data[0].metadata;
-            // mark payment as paid
-            await Order.findByIdAndUpdate(orderId, {isPaid: true})
-            // clear user cart
-            await User.findByIdAndUpdate(userId, {cartItems: {}})
-            break;
+            // Mark order as paid
+            await Order.findByIdAndUpdate(orderId, { isPaid: true });
 
-        }
-        case "payment_intent.payment_failed": {
-            const paymentIntent = event.data.object;
-            const paymentIntentId = paymentIntent.id;
+            // Clear user cart
+            await User.findByIdAndUpdate(userId, { cartItems: {} });
 
-            // getting session metadata;
-            const session = await stripeInstance.checkout.sessions.list({
-                payment_intent: paymentIntentId,
-            });
-
-            const { orderId } = session.data[0].metadata;
-            await Order.findByIdAndDelete(orderId);
             break;
         }
+        // case "payment_intent.payment_failed": {
+        //     const paymentIntent = event.data.object;
+        //     const paymentIntentId = paymentIntent.id;
+
+        //     // getting session metadata;
+        //     const session = await stripeInstance.checkout.sessions.list({
+        //         payment_intent: paymentIntentId,
+        //     });
+
+        //     const { orderId } = session.data[0].metadata;
+        //     await Order.findByIdAndDelete(orderId);
+        //     break;
+        // }
             
     
         default:
