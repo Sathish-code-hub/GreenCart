@@ -49,11 +49,6 @@ const Cart = () => {
 
     const placeOrder = async() => {
         try {
-            if (!user || !user._id) {
-                toast.error("Please login to place an order.")
-                setShowUserLogin(true)
-                return
-            }
 
             if (!selectedAddress) {
                 return toast.error("Please select an address")
@@ -93,6 +88,12 @@ const Cart = () => {
         }
     }
 
+    useEffect(() => {
+        if (!user) {
+            setShowUserLogin(true); // or navigate('/login')
+        }
+    }, []);
+    
     useEffect(()=>{
         if (products.length > 0  && cartItems) {
             getCart()
