@@ -18,15 +18,6 @@ export const register = async(req,res) => {
         }
 
         // Validate password strength
-        if (!validator.isStrongPassword(password, {
-            minLength: 8,
-           
-        })) {
-            return res.json({
-                success: false,
-                message: "Password must be at least 8 characters",
-            });
-        }
 
         const existingUser = await User.findOne({email})
 

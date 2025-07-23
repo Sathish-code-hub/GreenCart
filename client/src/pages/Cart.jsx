@@ -6,7 +6,10 @@ import Login from "../components/Login";
 
 const Cart = () => {
 
-    const {products, updateCartItem, cartItems, navigate, setsetUser, setShowUserLogin, 
+    // login email: sample1@gmail.com
+            // pass: sample1local
+
+    const {products, updateCartItem, cartItems, navigate, setShowUserLogin, 
     getCartCount, getCartAmount, removeFromCart, currency, axios, user, setCartItems} = useAppContext()
 
     const [cartArray, setCartArray] = useState([])
@@ -189,7 +192,7 @@ const Cart = () => {
 
                     <p className="text-sm font-medium uppercase mt-6">Payment Method</p>
 
-                    <select onClick={e => setPaymentOption(e.target.value)} className="w-full border border-gray-300 bg-white px-3 py-2 mt-2 outline-none">
+                    <select onChange={e => setPaymentOption(e.target.value)} className="w-full border border-gray-300 bg-white px-3 py-2 mt-2 outline-none">
                         <option value="COD">Cash On Delivery</option>
                         <option value="Online">Online Payment</option>
                     </select>
