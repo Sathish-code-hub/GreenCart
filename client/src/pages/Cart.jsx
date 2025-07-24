@@ -49,6 +49,10 @@ const Cart = () => {
 
     const placeOrder = async() => {
         try {
+            if (!user) {
+                setShowUserLogin(true); // or navigate('/login')
+                return toast.error("Please login to buy products")
+            }
 
             if (!selectedAddress) {
                 return toast.error("Please select an address")
@@ -87,12 +91,6 @@ const Cart = () => {
             toast.error(error.message)
         }
     }
-
-    useEffect(() => {
-        if (!user) {
-            setShowUserLogin(true); // or navigate('/login')
-        }
-    }, []);
     
     useEffect(()=>{
         if (products.length > 0  && cartItems) {
@@ -105,6 +103,15 @@ const Cart = () => {
             getUserAddress()
         }
     },[user])
+
+    useEffect(() => {
+        if (paymentOption === "Online") {
+            const totalAmount = getCartAmount() + getCartAmount() * 2 / 100;
+            if (totalAmount < 50) {
+                toast.error("Minimum order value for card payments is ₹50");
+            }
+        }
+    }, [paymentOption, cartItems]);
    
     return Array.isArray(products) && products.length > 0  && cartItems ? (
         <div className="flex flex-col md:flex-row mt-16" >
@@ -218,9 +225,17 @@ const Cart = () => {
                     </p>
                 </div>
 
-                <button onClick={placeOrder} className="w-full py-3 mt-6 cursor-pointer bg-primary text-white font-medium hover:bg-primary-dull transition">
-                    {paymentOption === "COD" ? "Place Order" : "Proceed to Chechout"}
+                <button
+                    onClick={placeOrder}
+                    disabled={paymentOption === "Online" && (getCartAmount() + getCartAmount() * 2 / 100) < 50}
+                    className={`w-full py-3 mt-6 cursor-pointer font-medium transition 
+              ${paymentOption === "Online" && (getCartAmount() + getCartAmount() * 2 / 100) < 50
+                            ? "bg-gray-400 cursor-not-allowed"
+                            : "bg-primary text-white hover:bg-primary-dull"}`}
+                >
+                    {paymentOption === "COD" ? "Place Order" : "Proceed to Checkout"}
                 </button>
+
             </div>
         </div>
     ) : <div className="mt-10 text-center text-primary text-base md:text-lg">
