@@ -19,7 +19,7 @@ const AllProducts = () => {
         setFilteredProducts(products)
       }
       setLoading(false)
-    }, 400) // 400ms delay to simulate loading
+    }, 4000) // 400ms delay to simulate loading
 
     return () => clearTimeout(timeout)
   }, [products, searchQuery])

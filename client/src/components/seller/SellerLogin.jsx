@@ -33,7 +33,7 @@ const SellerLogin = () => {
 
     useEffect(()=>{
         if (isSeller) {
-            navigate('/seller')            
+            navigate('/seller', {replace: true})            
         }
     },[isSeller])
 

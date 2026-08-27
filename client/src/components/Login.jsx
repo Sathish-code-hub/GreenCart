@@ -27,7 +27,7 @@ const Login = () => {
             })
 
             if (data.success) {
-                navigate('/')
+                navigate('/', {replace: true})
                 setUser(data.user)
                 setShowUserLogin(false)
                 toast.success("Successfully logged-in")
