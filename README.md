@@ -1,3 +1,5 @@
+LIVE: https://green-cart-henna.vercel.app
+
 🛒 GreenCart – Full Stack E-commerce Application
 
 GreenCart is a full stack e-commerce web application built using the MERN stack. The goal of this project is to simulate a real-world online shopping experience, including product browsing, cart management, and secure payments.
