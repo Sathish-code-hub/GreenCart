@@ -46,7 +46,7 @@ Webhooks are implemented to ensure secure and reliable payment confirmation befo
 
 📦 Deployment
 Frontend: Vercel
-Backend: Render
+Backend: vercel
 Database: MongoDB Atlas
 
 🎯 What I Learned
